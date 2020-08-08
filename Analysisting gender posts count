@@ -1,0 +1,27 @@
+import requests, json
+import matplotlib.pyplot as plt
+url ='https://www.dcard.tw/_api/forums/dressup/posts?popular=false'
+res = requests.get(url)
+resjson = json.loads(res.text)
+gender = {'F':0, 'M':0}
+
+for outcome in resjson:
+    gender[outcome['gender']] = gender[outcome['gender']] + 1
+    
+gender = {'F':0, 'M':0}
+for outcome in resjson:
+    gender[outcome['gender']] = gender[outcome['gender']] + 1
+sex = ['女性','男性']
+
+count = [gender['F'],gender['M']]
+
+
+import numpy as np
+x = np.arange(2)
+
+plt.title('Dacard dress up analysist')
+plt.xticks(x,('boy','girl'))
+plt.ylabel('counts')
+plt.bar(sex,count)
+plt.savefig('Dacard dress up.png')
+plt.show()
